@@ -1,0 +1,27 @@
+ 
+Running ./version_test.py...
+ 
+-----------------------------------------------
+sys.path:
+['/home/elena/Desktop/GitHub_EK/Exercises/Python_exercises/Python3_package_management', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/home/elena/.local/lib/python3.6/site-packages', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages']
+-----------------------------------------------
+'inspect.getfile(numpy)' gives:  /home/elena/.local/lib/python3.6/site-packages/numpy/__init__.py
+ 
+'numpy.__version__' gives:  1.19.0
+-----------------------------------------------
+ 
+Running ./version_test_switched.py...
+ 
+-----------------------------------------------
+sys.path old:
+['/home/elena/Desktop/GitHub_EK/Exercises/Python_exercises/Python3_package_management', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/home/elena/.local/lib/python3.6/site-packages', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages']
+-----------------------------------------------
+sys.path[4] old     /home/elena/.local/lib/python3.6/site-packages
+sys.path[6] old     /usr/lib/python3/dist-packages
+-----------------------------------------------
+sys.path[4] new     /usr/lib/python3/dist-packages
+sys.path[6] new     /home/elena/.local/lib/python3.6/site-packages
+-----------------------------------------------
+'inspect.getfile(numpy)' gives:  /usr/lib/python3/dist-packages/numpy/__init__.py
+ 
+'numpy.__version__' gives:  1.13.3

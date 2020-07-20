@@ -1,0 +1,75 @@
+When using both apt-get and PIP for Python package management:
+
+apt-get installs in /usr/lib (on ubuntu 18.04)
+
+PIP installs in /home/elena/.local (on ubuntu 18.04)
+In /home/elena/.local there are two separate python3.x and python2.7 
+directories. The desired package should be installed in the python3.x.
+directory in order to run it with Python 3.
+
+PIP will install dependencies without asking, regardless of whether they are 
+already installed in /usr/lib or not. So maybe it's best to just use pip
+whenever possible and never use apt-get if possible. So that you don't have
+multiple versions of the same package.
+
+Also make sure that PIP downloads with --user and specify python 3.
+When running PIP3 on Ubuntu 18.04 without sudo, this is the default
+
+Add shebang path (#!/usr/bin/python3.x) when running on Ubuntu 18.04 because
+Python 2 is the default in Ubuntu 18.04
+
+In order to import a package the location of the package (for example 
+/home/elena/.local and /usr/lib) must be added to the PATH.
+
+If there are multiple versions of the same package, present in different
+locations, python will search the PATH as it is defined in sys.path in
+order, and once it encounters a version of the desired package, it imports
+it, and stops searching. So, it will import the version of the package that
+it encounters first as it's searching sys.path. In order to import a specific
+version of a package, we can modify the PATH, either by modifying the 
+PYTHONPATH variable, or by modifying sys.path, so that the desired version
+of the package is encountered first.
+
+Taking, numpy on my current system (Ubuntu 18.04) as example:
+
+Currently the PATH variable is defined as:
+---------------------------------------------------------------------
+[...ises/Python3_package_management]python3
+Python 3.6.9 (default, Apr 18 2020, 01:56:04) 
+[GCC 8.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sys
+>>> sys.path
+['', '/usr/lib/python36.zip', '/usr/lib/python3.6', '/usr/lib/python3.6/lib-dynload', '/home/elena/.local/lib/python3.6/site-packages', '/usr/local/lib/python3.6/dist-packages', '/usr/lib/python3/dist-packages']
+>>> 
+---------------------------------------------------------------------
+(sys.path when run from inside a python script also contains the current
+directory, but this is not the case when running on the commandline)
+---------------------------------------------------------------------
+
+There is a version of numpy in the following two locations
+on the PATH:
+
+home/elena/.local/lib/python3.6/site-packages/numpy
+(i.e. sys.path[3]/numpy)
+(version 1.19.0)
+
+and
+
+/usr/lib/python3/dist-packages/numpy
+(i.e. sys.path[5]/numpy)
+(version 1.13.3)
+
+Some details about these two versions are written in the file version_files
+in this directory
+
+version 1.19.0 in home/elena/.local/lib/python3.6/site-packages/numpy is
+ahead of version 1.13.3 in /usr/lib/python3/dist-packages/numpy in the
+PATH. So, when we set import numpy, version 1.19.0 is imported. But, if we
+change the order of these two packages, version 1.13.3 is imported instead.
+
+This can be done by modifying the PYTHONPATH variable:
+(switch_using_PYTHONPATH.sh)
+
+Or by changing the order of the two packages in sys.path prior to importing:
+(switch_using_sys_path.sh)
