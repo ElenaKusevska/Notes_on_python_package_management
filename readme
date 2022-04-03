@@ -8,11 +8,16 @@ directories. The desired package should be installed in the python3.x.
 directory in order to run it with Python 3.
 
 PIP will install dependencies without asking, regardless of whether they are 
-already installed in /usr/lib or not. So maybe it's best to just use pip
-whenever possible and never use apt-get if possible. So that you don't have
-multiple versions of the same package.
+already installed in /usr/lib or not. 
 
-Also make sure that PIP downloads with --user and specify python 3.
+IMPORTANT: I don't advise using poth apt-get and PIP simultaneously.
+It's an unnecessary hassle. I would recommend using apt-get for system-wide
+installations, which should minimal (only necessary packages), and then for
+every new project set up a project specific venv, and install all packages
+needed for the project in the venv.
+
+Note: when using PIP for system-wide installations, make sure that 
+PIP downloads with --user and specify python 3.
 When running PIP3 on Ubuntu 18.04 without sudo, this is the default
 
 Add shebang path (#!/usr/bin/python3.x) when running on Ubuntu 18.04 because
